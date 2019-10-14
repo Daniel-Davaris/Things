@@ -85,13 +85,12 @@ def addProduct():
     ```
     {
         'retailer': 'aliexpress', # Only recommended for now
-        'product_id': '32850545097' # some random bag lol
+        'product_id': '32850545097' # some random bag
     }
     ```
 
 
-    The code here is an antipattern lol
-    but, don't question 2019 me
+    The code here is an antipattern
     """
     try:
         data = request.get_json()
@@ -134,7 +133,7 @@ def addProduct():
                     Image(
                         item_id=item.id,
                         img_url=x,
-                        is_primary=False if index != 0 else True, # shut up i think its funky
+                        is_primary=False if index != 0 else True,
                     )
                     for index, x in enumerate(data['images'])
                 ],
