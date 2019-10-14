@@ -159,4 +159,4 @@ def addProduct():
         return "Invalid input format", 500
 
 
-# @api.route('/makeOrder', methods=['post'])
+# @api.route('/makeOrder', methods=['POST'])
