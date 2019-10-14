@@ -23,6 +23,7 @@ class Person(db.Model, UserMixin):
 class Item(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.)
     img = db.Column(db.Blob)
     title = db.Column(db.String(50))
     desc = db.Column(db.String(300))
