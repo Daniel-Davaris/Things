@@ -29,7 +29,8 @@ def getProduct(productID):
     """ 
     Get Product
 
-    This api route takes a product ID and returns the related product in json form.
+    This api route takes a product ID from our database
+    and returns the related product in json form.
     
     An example of the format can be seen below in a json schema:
     ```
@@ -49,7 +50,7 @@ def getProduct(productID):
     ```
     
     """
-    item    = Item.query.filter_by(product_id=productID).first_or_404()
+    item    = Item.query.filter_by(id=productID).first_or_404()
     imgs    = sorted(Image.query.filter_by(item_id=item.id).all(), key=lambda x: x.is_primary)
     cats    = [Category.get(x.category_id) for x in Category_Item.query.filter_by(item_id=item.id).all()]
     brand   = [Brand.query.get(x.brand_id) for x in Brand_Item.query.filter_by(item_id=item.id).all()]
@@ -80,7 +81,17 @@ def addProduct():
     and adds said product to the database with all connections
     nessesery
 
+    Post example:
+    ```
+    {
+        'retailer': 'aliexpress', # Only recommended for now
+        'product_id': '32850545097' # some random bag lol
+    }
+    ```
+
+
     The code here is an antipattern lol
+    but, don't question 2019 me
     """
     try:
         data = request.get_json()
@@ -123,7 +134,7 @@ def addProduct():
                     Image(
                         item_id=item.id,
                         img_url=x,
-                        is_primary=False if index != 0 else True,
+                        is_primary=False if index != 0 else True, # shut up i think its funky
                     )
                     for index, x in enumerate(data['images'])
                 ],
@@ -147,4 +158,5 @@ def addProduct():
     except:
         return "Invalid input format", 500
 
-        
+
+# @api.route('/makeOrder', methods=['POST'])
