@@ -32,7 +32,11 @@ class Item(db.Model):
     old_price = db.Column(db.Integer)
     new_price = db.Column(db.Integer)
 
+class Bullets(db.Model):
+    __tablename__ = 'bullets'
 
+    id = db.Column(db.Integer, primary_key=True)
+    item_id = db.Column(db.Integer)
 
 class Image(db.Model):
     __tablename__ = 'image'
@@ -40,7 +44,7 @@ class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     item_id = db.Column(db.Integer)
     img_url = db.Column(db.String(100))
-    is_primary = db.Column(db.Boolean)
+    is_primary = db.Column(db.Boolean, default=False, unique=False)
 
 
 class Category(db.Model):

@@ -7,7 +7,8 @@ from app.models import (
     Category_Item,
     Details,
     Brand,
-    Brand_Item
+    Brand_Item,
+    Bullets
 )
 import json
 import requests
@@ -18,32 +19,36 @@ zinc = 'https://api.zinc.io/v1/'
 api = Blueprint('API', __name__)
 
 @api.route('/getProduct/<productID>') # Send a get request to url.com/api/getProduct/*ID*HERE*
-def product(productID):
+def getProduct(productID):
     """ 
+    Get Product
+
     This api route takes a product ID and returns the related product in json form.
     
     An example of the format can be seen below in a json schema:
-
+    ```
     {
-        id: int,
-        product_id: int,
-        title: str,
-        desc: str,
-        details: List<str>,
-        bullets: str,
-        brand: str,
-        imgs: List<urls>, # 0th image is primary img
-        categories: List<str>,
-        old_price: int,
-        new_price: int,
+        'id': int,
+        'product_id': int,
+        'title': str,
+        'desc': str,
+        'details': List<str>,
+        'bullets': str,
+        'brand': str,
+        'imgs': List<urls>, # 0th image is primary img
+        'categories': List<str>,
+        'old_price': int,
+        'new_price': int,
     }
+    ```
     
     """
     item    = Item.query.filter_by(product_id=productID).first_or_404()
     imgs    = sorted(Image.query.filter_by(item_id=item.id).all(), key=lambda x: x.is_primary)
     cats    = [Category.get(x.category_id) for x in Category_Item.query.filter_by(item_id=item.id).all()]
-    brand   = [Brand.query.get(x.brand_id) for x in Brand_Item.query.filter_by(item_id=item.id)]
-    details = Details.query.filter_by(item_id=item.id)
+    brand   = [Brand.query.get(x.brand_id) for x in Brand_Item.query.filter_by(item_id=item.id).all()]
+    details = Details.query.filter_by(item_id=item.id).all()
+    bullets = Bullets.query.filter_by(item_id=item.id).all()
 
     return json.dumps({
         'id'        :item.id,
@@ -51,7 +56,7 @@ def product(productID):
         'title'     :item.title,
         'desc'      :item.desc,
         'details'   :details,
-        'bullets'   :item.bullets,
+        'bullets'   :bullets,
         'brand'     :brand,
         'imgs'      :imgs,
         'categories':cats,
@@ -61,13 +66,57 @@ def product(productID):
 
 @api.route('/addProduct', methods=['POST'])
 def addProduct():
+
     try:
         data = request.get_json()
-
         data = requests.get(
             f"{zinc}/products/{data['product_id']}",
-            params=[('retailer', retailer)],
+            params=[('retailer', data['retailer'])],
             auth=(',client_token>', api_key)
         )
+        item = Item(
+            product_id=data['product_id'],
+            title=data['title'],
+            desc=data['product_description'],
+            old_price=data['price'],
+            new_price=(int(data['price'])*1.4),
+        )
+        categories = [
+            Category(title=x)
+            for x in data['categories']
+        ]
+        brand = Brand.query.filter_by(title=data['brand']).first()
+        brand = brand if brand else Brand(title=data['brand'])
+        db.session.add_all([
+                item,
+                *categories,
+                *[
+                    Bullet(
+                        item_id=item.id,
+                        text=x
+                    )
+                    for x in data['feature_bullets']
+                ],
+                *[
+                    Image(
+                        item_id=item.id,
+                        img_url=x,
+                        is_primary=False if index != 0 else True,
+                    )
+                    for x in data['images']
+                ],
+                *[
+                    Category_Item(
+                        item_id=item.id
+                        category_id=x.id
+                    )
+                    for x in categories
+                ]
+                *[
+                    pass
+                ]
+            ]
+        )
+        db.session.commit()
     except:
         return "Invalid input format", 500
