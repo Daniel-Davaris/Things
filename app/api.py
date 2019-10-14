@@ -146,3 +146,5 @@ def addProduct():
         db.session.commit()
     except:
         return "Invalid input format", 500
+
+        
