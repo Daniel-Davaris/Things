@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 87546e1673b7
+Revision ID: 76cb5f09d723
 Revises: 
-Create Date: 2019-10-14 23:01:30.469931
+Create Date: 2019-10-15 00:55:26.204126
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '87546e1673b7'
+revision = '76cb5f09d723'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,9 +24,16 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('brand_item',
-    sa.Column('item_id', sa.Integer(), nullable=False),
-    sa.Column('brand_id', sa.Integer(), nullable=False),
-    sa.PrimaryKeyConstraint('item_id', 'brand_id')
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('item_id', sa.Integer(), nullable=True),
+    sa.Column('brand_id', sa.Integer(), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('bullets',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('item_id', sa.Integer(), nullable=True),
+    sa.Column('text', sa.String(length=100), nullable=True),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('category',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -34,9 +41,10 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('category_item',
-    sa.Column('item_id', sa.Integer(), nullable=False),
-    sa.Column('category_id', sa.Integer(), nullable=False),
-    sa.PrimaryKeyConstraint('item_id', 'category_id')
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('item_id', sa.Integer(), nullable=True),
+    sa.Column('category_id', sa.Integer(), nullable=True),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('details',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -56,7 +64,6 @@ def upgrade():
     sa.Column('product_id', sa.String(length=20), nullable=True),
     sa.Column('title', sa.String(length=50), nullable=True),
     sa.Column('desc', sa.String(length=300), nullable=True),
-    sa.Column('bullets', sa.String(length=100), nullable=True),
     sa.Column('old_price', sa.Integer(), nullable=True),
     sa.Column('new_price', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -85,6 +92,7 @@ def downgrade():
     op.drop_table('details')
     op.drop_table('category_item')
     op.drop_table('category')
+    op.drop_table('bullets')
     op.drop_table('brand_item')
     op.drop_table('brand')
     # ### end Alembic commands ###
