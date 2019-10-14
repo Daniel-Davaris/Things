@@ -30,6 +30,7 @@ class Item(db.Model):
     desc = db.Column(db.String(300))
     old_price = db.Column(db.Integer)
     new_price = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
 
 class Bullets(db.Model):
     __tablename__ = 'bullets'
