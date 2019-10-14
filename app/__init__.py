@@ -10,7 +10,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 
-from api import api
+from app.api import api
 app.register_blueprint(api, url_prefix='/api')
 
 

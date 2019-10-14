@@ -1,6 +1,14 @@
 from flask import Blueprint
 from app import db
-from app.models import *
+from app.models import (
+    Item,
+    Image,
+    Category,
+    Category_Item,
+    Details,
+    Brand,
+    Brand_Item
+)
 import json
 
 api = Blueprint('API', __name__)
