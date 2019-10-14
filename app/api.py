@@ -125,7 +125,7 @@ def addProduct():
                         img_url=x,
                         is_primary=False if index != 0 else True,
                     )
-                    for x in data['images']
+                    for index, x in enumerate(data['images'])
                 ],
                 *[
                     Category_Item(
