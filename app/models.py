@@ -52,8 +52,9 @@ class Category(db.Model):
 
 class Category_Item(db.Model):
     __tablename__ = 'category_item'
-    item_id = db.Column(db.Integer, primary_key=True)
-    category_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    item_id = db.Column(db.Integer)
+    category_id = db.Column(db.Integer)
 
 
 class Brand(db.Model):
@@ -67,8 +68,9 @@ class Brand(db.Model):
 class Brand_Item(db.Model):
     __tablename__ = 'brand_item'
 
-    item_id = db.Column(db.Integer, primary_key=True)
-    brand_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    item_id = db.Column(db.Integer)
+    brand_id = db.Column(db.Integer)
 
 
 class Details(db.Model):

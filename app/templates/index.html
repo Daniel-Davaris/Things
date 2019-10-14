@@ -6,24 +6,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>winter</title>
-    <link rel="icon" href="img/favicon.png">
+
+    <!--         {{url_for('static', filename='
+        
+                 ')}}                 -->
+
+    <link rel="icon" href="{{url_for('static', filename='img/favicon.png')}}">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href=" {{url_for('static', filename='css/bootstrap.min.css ')}}">
     <!-- animate CSS -->
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}   ">
     <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href=" {{url_for('static', filename='css/owl.carousel.min.css  ')}}   ">
     <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/all.css')}}   ">
     <!-- flaticon CSS -->
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href=" {{url_for('static', filename='css/flaticon.css ')}}  ">
+    <link rel="stylesheet" href=" {{url_for('static', filename='css/themify-icons.css')}}    ">
     <!-- font awesome CSS -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/magnific-popup.css')}}    ">
     <!-- swiper CSS -->
-    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/slick.css')}}   ">
     <!-- style CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}} ">
 </head>
 
 <body>
@@ -33,7 +38,7 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-11">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html"> <img src="img/logo.png" alt="logo"> </a>
+                        <a class="navbar-brand" href="{{url_for('static', filename='index.html')}}"> <img src="{{url_for('static', filename='img/logo.png')}}" alt="logo"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -43,50 +48,50 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Home</a>
+                                    <a class="nav-link" href="{{url_for('static', filename='index.html')}}">Home</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                    <a class="nav-link dropdown-toggle" href="{{url_for('static', filename='blog.html')}}" id="navbarDropdown_1"
                                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Shop
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="category.html"> shop category</a>
-                                        <a class="dropdown-item" href="single-product.html">product details</a>
+                                        <a class="dropdown-item" href="{{url_for('static', filename='category.html')}}"> shop category</a>
+                                        <a class="dropdown-item" href="{{url_for('static', filename='single-product.html')}}">product details</a>
                                         
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
+                                    <a class="nav-link dropdown-toggle" href="{{url_for('static', filename='blog.html')}}" id="navbarDropdown_3"
                                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         pages
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="login.html"> 
+                                        <a class="dropdown-item" href="{{url_for('static', filename='login.html')}}"> 
                                             login
                                             
                                         </a>
-                                        <a class="dropdown-item" href="tracking.html">tracking</a>
-                                        <a class="dropdown-item" href="checkout.html">product checkout</a>
-                                        <a class="dropdown-item" href="cart.html">shopping cart</a>
-                                        <a class="dropdown-item" href="confirmation.html">confirmation</a>
-                                        <a class="dropdown-item" href="elements.html">elements</a>
+                                        <a class="dropdown-item" href="{{url_for('static', filename='tracking.html')}}">tracking</a>
+                                        <a class="dropdown-item" href="{{url_for('static', filename='checkout.html')}}">product checkout</a>
+                                        <a class="dropdown-item" href="{{url_for('static', filename='cart.html')}}">shopping cart</a>
+                                        <a class="dropdown-item" href="{{url_for('static', filename='confirmation.html')}}">confirmation</a>
+                                        <a class="dropdown-item" href="{{url_for('static', filename='elements.html')}}">elements</a>
                                     </div>
                                 </li>
                                 
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
+                                    <a class="nav-link dropdown-toggle" href="{{url_for('static', filename='blog.html')}}" id="navbarDropdown_2"
                                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         blog
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="blog.html"> blog</a>
-                                        <a class="dropdown-item" href="single-blog.html">Single blog</a>
+                                        <a class="dropdown-item" href="{{url_for('static', filename='blog.html')}}"> blog</a>
+                                        <a class="dropdown-item" href="{{url_for('static', filename='single-blog.html')}}">Single blog</a>
                                     </div>
                                 </li>
                                 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contact</a>
+                                    <a class="nav-link" href="{{url_for('static', filename='contact.html')}}">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -148,25 +153,25 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_feature_post_text">
-                        <img src="img/feature_1.png" alt="#">
+                        <img src="{{url_for('static', filename='img/feature_1.png')}}" alt="#">
                         <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">shop for male</a>
+                            <a href="{{url_for('static', filename='single-product.html')}}" class="btn_2">shop for male</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_feature_post_text">
-                        <img src="img/feature_2.png" alt="#">
+                        <img src="{{url_for('static', filename='img/feature_2.png')}}" alt="#">
                         <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">shop for male</a>
+                            <a href="{{url_for('static', filename='single-product.html')}}" class="btn_2">shop for male</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_feature_post_text">
-                        <img src="img/feature_3.png" alt="#">
+                        <img src="{{url_for('static', filename='img/feature_3.png')}}" alt="#">
                         <div class="hover_text">
-                            <a href="single-product.html" class="btn_2">shop for male</a>
+                            <a href="{{url_for('static', filename='single-product.html')}}" class="btn_2">shop for male</a>
                         </div>
                     </div>
                 </div>
@@ -201,10 +206,10 @@
                 <div class="col-lg-12">
                     <div class="new_arrival_iner filter-container">
                         <div class="single_arrivel_item weidth_1 mix shoes">
-                            <img src="img/arrivel/arrivel_5.png" alt="#">
+                            <img src="{{url_for('static', filename='img/arrivel/arrivel_5.png')}}" alt="#">
                             <div class="hover_text">
                                 <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
+                                <a href="{{url_for('static', filename='single-product.html')}}"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
                                 <div class="rate_icon">
                                     <a href="#"> <i class="fas fa-star"></i> </a>
                                     <a href="#"> <i class="fas fa-star"></i> </a>
@@ -220,10 +225,10 @@
                             </div>
                         </div>
                         <div class="single_arrivel_item weidth_2 mix women">
-                            <img src="img/arrivel/arrivel_2.png" alt="#">
+                            <img src="{{url_for('static', filename='img/arrivel/arrivel_2.png')}}" alt="#">
                             <div class="hover_text">
                                 <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
+                                <a href="{{url_for('static', filename='single-product.html')}}"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
                                 <div class="rate_icon">
                                     <a href="#"> <i class="fas fa-star"></i> </a>
                                     <a href="#"> <i class="fas fa-star"></i> </a>
@@ -239,10 +244,10 @@
                             </div>
                         </div>
                         <div class="single_arrivel_item weidth_3 mix shoes women" >
-                            <img src="img/arrivel/arrivel_3.png" alt="#">
+                            <img src="{{url_for('static', filename='img/arrivel/arrivel_3.png')}}" alt="#">
                             <div class="hover_text">
                                 <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
+                                <a href="{{url_for('static', filename='single-product.html')}}"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
                                 <div class="rate_icon">
                                     <a href="#"> <i class="fas fa-star"></i> </a>
                                     <a href="#"> <i class="fas fa-star"></i> </a>
@@ -258,10 +263,10 @@
                             </div>
                         </div>
                         <div class="single_arrivel_item weidth_3 mix women men">
-                            <img src="img/arrivel/arrivel_4.png" alt="#">
+                            <img src="{{url_for('static', filename='img/arrivel/arrivel_4.png')}}" alt="#">
                             <div class="hover_text">
                                 <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
+                                <a href="{{url_for('static', filename='single-product.html')}}"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
                                 <div class="rate_icon">
                                     <a href="#"> <i class="fas fa-star"></i> </a>
                                     <a href="#"> <i class="fas fa-star"></i> </a>
@@ -277,10 +282,10 @@
                             </div>
                         </div>
                         <div class="single_arrivel_item weidth_2 mix men women">
-                            <img src="img/arrivel/arrivel_1.png" alt="#">
+                            <img src="{{url_for('static', filename='img/arrivel/arrivel_1.png')}}" alt="#">
                             <div class="hover_text">
                                 <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
+                                <a href="{{url_for('static', filename='single-product.html')}}"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
                                 <div class="rate_icon">
                                     <a href="#"> <i class="fas fa-star"></i> </a>
                                     <a href="#"> <i class="fas fa-star"></i> </a>
@@ -296,10 +301,10 @@
                             </div>
                         </div>
                         <div class="single_arrivel_item weidth_1 mix shoes men">
-                            <img src="img/arrivel/arrivel_6.png" alt="#">
+                            <img src="{{url_for('static', filename='img/arrivel/arrivel_6.png')}}" alt="#">
                             <div class="hover_text">
                                 <p>Canvas</p>
-                                <a href="single-product.html"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
+                                <a href="{{url_for('static', filename='single-product.html')}}"><h3>Lorem Canvas Low-Top Sneaker</h3></a>
                                 <div class="rate_icon">
                                     <a href="#"> <i class="fas fa-star"></i> </a>
                                     <a href="#"> <i class="fas fa-star"></i> </a>
@@ -327,21 +332,21 @@
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
                     <div class="single_shopping_details">
-                        <img src="img/icon/icon_1.png" alt="">
+                        <img src="{{url_for('static', filename='img/icon/icon_1.png')}}" alt="">
                         <h4>Free shipping</h4>
                         <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="single_shopping_details">
-                        <img src="img/icon/icon_2.png" alt="">
+                        <img src="{{url_for('static', filename='img/icon/icon_2.png')}}" alt="">
                         <h4>Free shipping</h4>
                         <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="single_shopping_details">
-                        <img src="img/icon/icon_3.png" alt="">
+                        <img src="{{url_for('static', filename='img/icon/icon_3.png')}}" alt="">
                         <h4>Free shipping</h4>
                         <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
                     </div>
