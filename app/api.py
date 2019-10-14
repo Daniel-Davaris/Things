@@ -81,6 +81,7 @@ def addProduct():
     nessesery
 
     The code here is an antipattern lol
+    but, don't question 2019 me
     """
     try:
         data = request.get_json()
