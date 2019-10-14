@@ -47,7 +47,7 @@ class Category(db.Model):
     __tablename__ = 'category'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(100)
+    title = db.Column(db.String(100))
 
 
 class Category_Item(db.Model):
@@ -60,7 +60,8 @@ class Brand(db.Model):
     __tablename__ = 'brand'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(100)
+    title = db.Column(db.String(100))
+
 
 
 class Brand_Item(db.Model):
