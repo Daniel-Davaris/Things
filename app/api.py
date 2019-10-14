@@ -33,7 +33,7 @@ def getProduct(productID):
     and returns the related product in json form.
     
     An example of the format can be seen below in a json schema:
-    ```js
+    ```
     {
         'id': int,
         'product_id': int,
@@ -42,7 +42,7 @@ def getProduct(productID):
         'details': List<str>,
         'bullets': str,
         'brand': str,
-        'imgs': List<urls>, // 0th image is primary img
+        'imgs': List<urls>, # 0th image is primary img
         'categories': List<str>,
         'old_price': int,
         'new_price': int,
@@ -84,8 +84,8 @@ def addProduct():
     Post example:
     ```
     {
-        'retailer': 'aliexpress', // Only recommended for now
-        'product_id': '32850545097' // some random bag lol
+        'retailer': 'aliexpress', # Only recommended for now
+        'product_id': '32850545097' # some random bag lol
     }
     ```
 
@@ -134,7 +134,7 @@ def addProduct():
                     Image(
                         item_id=item.id,
                         img_url=x,
-                        is_primary=False if index != 0 else True,
+                        is_primary=False if index != 0 else True, # shut up i think its funky
                     )
                     for index, x in enumerate(data['images'])
                 ],
