@@ -28,7 +28,6 @@ class Item(db.Model):
     product_id = db.Column(db.String(20))
     title = db.Column(db.String(50))
     desc = db.Column(db.String(300))
-    bullets = db.Column(db.String(100))
     old_price = db.Column(db.Integer)
     new_price = db.Column(db.Integer)
 
@@ -37,6 +36,7 @@ class Bullets(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     item_id = db.Column(db.Integer)
+    text = db.Column(db.String(100))
 
 class Image(db.Model):
     __tablename__ = 'image'

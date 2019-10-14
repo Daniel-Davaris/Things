@@ -1,3 +1,9 @@
+""" 
+API is a file handling the product selling of the site
+
+Written by (proudly at the time): Stephan Kashkarov
+"""
+
 from flask import Blueprint, request
 from app import db
 from app.models import (
@@ -64,9 +70,18 @@ def getProduct(productID):
         'new_price' :item.new_price,
     })
 
+
 @api.route('/addProduct', methods=['POST'])
 def addProduct():
+    """
+    Add Product
 
+    The add product route takes a ZINC api product ID
+    and adds said product to the database with all connections
+    nessesery
+
+    The code here is an antipattern lol
+    """
     try:
         data = request.get_json()
         data = requests.get(
@@ -82,14 +97,21 @@ def addProduct():
             new_price=(int(data['price'])*1.4),
         )
         categories = [
-            Category(title=x)
+            Category(
+                title=x
+            )
             for x in data['categories']
         ]
         brand = Brand.query.filter_by(title=data['brand']).first()
         brand = brand if brand else Brand(title=data['brand'])
         db.session.add_all([
                 item,
+                brand,
                 *categories,
+                Brand_Item(
+                    item_id=item.id,
+                    brand_id=brand.id
+                ),
                 *[
                     Bullet(
                         item_id=item.id,
@@ -107,13 +129,17 @@ def addProduct():
                 ],
                 *[
                     Category_Item(
-                        item_id=item.id
+                        item_id=item.id,
                         category_id=x.id
                     )
                     for x in categories
-                ]
+                ],
                 *[
-                    pass
+                    Details(
+                        item_id=item.id,
+                        text=x
+                    )
+                    for x in data['details']
                 ]
             ]
         )
