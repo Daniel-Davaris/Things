@@ -6,7 +6,7 @@ Written by (proudly at the time): Stephan Kashkarov
 import json
 from requests import Session
 from flask import Blueprint, request
-from keys import api_key, retailer_credentials
+# from keys import api_key, retailer_credentials
 
 from app import app, db
 from app.models import (
