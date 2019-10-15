@@ -23,7 +23,7 @@ from app.models import (
 
 zinc = 'https://api.zinc.io/v1/'
 http = Session()
-http.auth = (api_key, '')
+# http.auth = (api_key, '')
 api = Blueprint('API', __name__)
 
 @api.route('/getProduct/<productID>') # Send a get request to url.com/api/getProduct/*ID*HERE*

@@ -17,9 +17,26 @@ def home():
 def category():
     title = "Categories"
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-    json_url = os.path.join(SITE_ROOT, "", "test_data.json")
+    json_url = os.path.join(SITE_ROOT, "static\\data", "test_data.json")
     data = json.load(open(json_url))
-    return render_template('categories.html', data=data, title=title)
+    # for product in range(len(data)):
+        
+        # ea = data[product]
+        # id = ea["id"]
+        # product_id = product["product_id"]
+        # title = ea["title"]
+        # desc = ea["desc"]
+        # details = ea["details"]
+        # bullets = ea["bullets"]
+        # brand = ea["brand"]
+        # imgs = product["imgs"]
+        # categories = ea["categories"]
+        # old_price = ea["old_price"]
+        # new_price = ea["new_price"]
+
+    # print(first["title"])
+    return render_template('category.html', data=data, title=title)
+    
 
 
 @app.route('/checkout')

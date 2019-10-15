@@ -1,0 +1,42 @@
+[
+{
+    "id": 1,
+    "product_id": 32800537530,
+    "title": "Nikon D3200 DSLR Camera with 18-55 Lens -24.2MP -Video (New)",
+    "desc": "Nikon D3200 DSLR Camera with 18-55mm is a professional imaging machine in the truest sense. It captures stunning high-resolution JPEG and RAW still photos and HD 1080p video via its 24.2MP DX-format CMOS sensor. Enjoy superior color and sharpness, make gorgeous adjustments and perform creative cropping without any loss in sharpness. ",
+    "details": ["24.2MP DX-Format CMOS Sensor",
+        "EXPEED 3 Image Processor",
+        "3.0in 921k-Dot LCD Monitor",
+        "Full HD 1080p Video Recording at 30 fps",
+       "Multi-CAM 1000 11-Point AF Sensor",
+        "Native ISO 6400, Extended to ISO 12800",
+        "Continuous Shooting Up to 4 fps",
+        "420-Pixel RGB Sensor Exposure Metering",
+        "12-Bit RAW Files",
+        "DX NIKKOR 18-55mm f/3.5-5.6G VR Lens]" ],
+    "bullets": "asdnasjfbsjdn asjdnasjdn a jsadn ojansd jasdn nasdjoasn d",
+    "brand": "Nikon",
+    "imgs": ["https://ae01.alicdn.com/kf/HTB1wBj7foRIWKJjSZFgq6zoxXXas/Nikon-D3200-DSLR-Camera-with-18-55-Lens-24-2MP-Video-New.jpg", "https://ae01.alicdn.com/kf/H2c546b8efa134c9c82902d9fab32b2a5Z/Nikon-D3200-DSLR-Camera-with-18-55-Lens-24-2MP-Video-New.jpg" ],
+    "categories": ["camera", "electronics", "consumer goods"],
+    "old_price": 299.99,
+    "new_price": 399.99
+
+    
+},
+{
+    "id": 2,
+    "product_id": 32914693568,
+    "title": "Original Xiaomi Notebook 15.6'' Pro GTX1050 Air Laptops Intel Core i5-8250U 4GB GDDR5 256GB PCIe 4 NVMe SSD DDR4 2400MHz Windows",
+    "desc": "The 8 generation Intel Core processor, No lock 4 core 8 thread, performance increase of 40%, No lock 4 cores and 8 threads, the maximum frequency is 4.0GHz, and the performance is 40% higher than the previous generation., Powerful and efficient multitasking, let you create, edit, and share graphics rendering and video content in near real time. ",
+    "details": ["15.6-inch (1920 x 1080 pixels) display with Corning Gorilla Glass 3 protection",
+        "Intel Core i5-8250U Quad Core, Up to 3.4GHz CPU",
+        "Intel Core i7-8550U Quad Core, Up to 4.0GHz CPU",
+        "4GB DDR5 NVIDIA GeForce® GTX 1050 Max-Q discrete graphics "],
+    "bullets": "asdnasjfbsjdn asjdnasjdn a jsadn ojansd jasdn nasdjoasn d",
+    "brand": "Xiaomi",
+    "imgs": ["https://ae01.alicdn.com/kf/HTB1R9A1c6fguuRjSszcq6zb7FXa2/Original-Xiaomi-Notebook-15-6-Pro-GTX1050-Air-Laptops-Intel-Core-i5-8250U-4GB-GDDR5-256GB.jpg", "https://ae01.alicdn.com/kf/HTB196DJKh1YBuNjy1zcq6zNcXXao/Original-Xiaomi-Notebook-15-6-Pro-GTX1050-Air-Laptops-Intel-Core-i5-8250U-4GB-GDDR5-256GB.jpg", "https://ae01.alicdn.com/kf/HTB196DJKh1YBuNjy1zcq6zNcXXao/Original-Xiaomi-Notebook-15-6-Pro-GTX1050-Air-Laptops-Intel-Core-i5-8250U-4GB-GDDR5-256GB.jpg", "https://ae01.alicdn.com/kf/HTB196DJKh1YBuNjy1zcq6zNcXXao/Original-Xiaomi-Notebook-15-6-Pro-GTX1050-Air-Laptops-Intel-Core-i5-8250U-4GB-GDDR5-256GB.jpg"],
+    "categories": ["laptop", "consumer electronics", "gaming laptop"],
+    "old_price": 1065,
+    "new_price": 2099
+}
+]

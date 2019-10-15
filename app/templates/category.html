@@ -182,16 +182,14 @@
 
                         <!-- products    -->
 
-                        {% for product in products %}
-                        <ul>
-                            {% for i in data %}
-                                <li>{{ i }}</li>
-                            {% endfor %}
-                        </ul>
-                        <!-- <div class="col-lg-4 col-sm-6">
+                       
+                     
+
+                        {% for i in data %}
+                        <div class="col-lg-4 col-sm-6">
                             <div class="single_category_product">
                                 <div class="single_category_img">
-                                    <img src="{{url_for('static', filename='')}}" alt="">
+                                    <img src="{{ i.imgs[0] }}" alt="">
                                     <div class="category_social_icon">
                                         <ul>
                                             <li><a href="#"><i class="ti-heart"></i></a></li>
@@ -199,14 +197,13 @@
                                         </ul>
                                     </div>
                                     <div class="category_product_text">
-                                        <a href="{{url_for('single_product')}}"><h5>Long Sleeve TShirt</h5></a>
-                                        <p>$150.00</p>
+                                        <a href="{{url_for('single_product')}}"><h5>{{ i.title }}</h5></a>
+                                        <p>${{ i.old_price}}</p>
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         {% endfor %}
-
               
 
                   
