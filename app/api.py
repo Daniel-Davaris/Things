@@ -8,11 +8,7 @@ from requests import Session
 from flask import Blueprint, request
 # from keys import api_key, retailer_credentials
 
-<<<<<<< HEAD
-# from app import db, celery
-=======
 from app import app, db
->>>>>>> 14fad91ae290824b7ff1702b48becc3e44565d06
 from app.models import (
     Item,
     Image,
