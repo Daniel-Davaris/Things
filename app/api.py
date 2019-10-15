@@ -3,9 +3,12 @@ API is a file handling the product selling of the site
 
 Written by (proudly at the time): Stephan Kashkarov
 """
-
+import json
+import requests
 from flask import Blueprint, request
-from app import db
+from keys import api_key, retailer_credentials
+
+from app import db, celery
 from app.models import (
     Item,
     Image,
@@ -14,11 +17,9 @@ from app.models import (
     Details,
     Brand,
     Brand_Item,
-    Bullets
+    Bullets,
+    Orders
 )
-import json
-import requests
-from keys import api_key
 
 zinc = 'https://api.zinc.io/v1/'
 
@@ -97,7 +98,7 @@ def addProduct():
         data = requests.get(
             f"{zinc}/products/{data['product_id']}",
             params=[('retailer', data['retailer'])],
-            auth=(',client_token>', api_key)
+            auth=(api_key)
         )
         item = Item(
             product_id=data['product_id'],
@@ -155,7 +156,33 @@ def addProduct():
         )
         db.session.commit()
     except:
-        return "Invalid input format", 500
+        return "Invalid json format", 500
 
 
-# @api.route('/makeOrder', methods=['POST'])
+@api.route('/makeOrder', methods=['POST'])
+def makeOrder():
+    try:
+        data = request.get_json()
+        data = requests.post(
+            f"{zinc}/orders",
+            data=json.dumps({
+                "retailer": "aliexpress",
+                "products": data['products'],
+                "max_price": 1000, # Change in future
+                "shipping_address": data['shipping'],
+                "billing_address": data['billing'],
+                "shipping": data['shipping_params'],
+                "is_gift": True,
+                "payment_method": data['payment'],
+                "retailer_credentials": retailer_credentials,
+                "shipping_method": data['shipping_method']
+            }),
+            auth=(api_key)
+        )
+        db.session.add(
+            Orders(
+                code=data['order'],
+            )
+        )
+    except:
+        return "Invalid json format", 500

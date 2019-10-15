@@ -1,8 +1,12 @@
-import hashlib
-from datetime import datetime
+from keys import api_key
 from app import db, login
+from datetime import datetime
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+
+import json
+import hashlib
+import requests
 
 class Person(db.Model, UserMixin):
     __tablename__ = 'person'
@@ -84,3 +88,19 @@ class Details(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     item_id = db.Column(db.Integer)
     text = db.Column(db.String(200))
+
+
+class Orders(db.Model):
+    __tablename__ = 'orders'
+
+    id = db.Column(db.Integer, primary_key=True)
+    code = db.Column(db.String(32))
+    status = db.Column(db.String(50))
+    active = db.Column(db.Boolean, default=True)
+
+    # def check_active(self):
+    #     data = requests.get(
+    #         f"https://api.zinc.io/v1/orders/{self.code}",
+    #         auth=(api_key)
+    #     )
+    #     self.status = data['']
