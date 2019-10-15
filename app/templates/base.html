@@ -1,6 +1,85 @@
-{% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
-   
-   
+<!doctype html>
+<html lang="en">
 
+<head>
+        
+               
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="latest tech devices" />
+    <meta name="keywords" content="tech, technology, devices, laptops, computers, phones, smartwatch, items, purchase, shop" />
+    <meta name="author" content="Things" />
+    <title>Things</title>
+    <link rel="icon" href="{{url_for('static', filename='img/favicon.png')}}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/animate.css')}}">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/owl.carousel.min.css')}}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/all.css')}}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/nice-select.css')}}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/lightslider.min.css')}}">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/flaticon.css')}}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/themify-icons.css')}}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/magnific-popup.css')}}">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/slick.css')}}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/price_rangs.css')}}">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+
+<body>
+<!-- body content here -->
+{% include 'navbar.html' %}
+
+{% block app_content %}
+{% endblock %}
+
+{% include 'footer.html' %}
+
+<!-- end body content  -->
+   
+ <!-- jquery plugins here-->
+ <script src="{{url_for('static', filename='js/jquery-1.12.1.min.js')}}"></script>
+ <!-- popper js -->
+ <script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+ <!-- bootstrap js -->
+ <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+ <!-- easing js -->
+ <script src="{{url_for('static', filename='js/jquery.magnific-popup.js')}}"></script>
+ <!-- swiper js -->
+ <script src="{{url_for('static', filename='js/swiper.min.js')}}"></script>
+ <!-- swiper js -->
+ <script src="{{url_for('static', filename='js/mixitup.min.js')}}"></script>
+ <!-- particles js -->
+ <script src="{{url_for('static', filename='js/owl.carousel.min.js')}}"></script>
+ <script src="{{url_for('static', filename='js/jquery.nice-select.min.js')}}"></script>
+ <!-- slick js -->
+ <script src="{{url_for('static', filename='js/slick.min.js')}}"></script>
+ <script src="{{url_for('static', filename='js/jquery.counterup.min.js')}}"></script>
+ <script src="{{url_for('static', filename='js/waypoints.min.js')}}"></script>
+ <script src="{{url_for('static', filename='js/contact.js')}}"></script>
+ <script src="{{url_for('static', filename='js/jquery.ajaxchimp.min.js')}}"></script>
+ <script src="{{url_for('static', filename='js/jquery.form.js')}}"></script>
+ <script src="{{url_for('static', filename='js/jquery.validate.min.js')}}"></script>
+ <script src="{{url_for('static', filename='js/mail-script.js')}}"></script>
+ <!-- custom js -->
+ <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+</body>
+
+</html>
 {% endblock %}
