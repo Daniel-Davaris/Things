@@ -21,9 +21,14 @@ from app.models import (
     Orders
 )
 
+# API base
 zinc = 'https://api.zinc.io/v1/'
+
+# Requests pre auth
 http = Session()
 http.auth = (api_key, '')
+
+
 api = Blueprint('API', __name__)
 
 @api.route('/getProduct/<productID>') # Send a get request to url.com/api/getProduct/*ID*HERE*
@@ -52,12 +57,12 @@ def getProduct(productID):
     ```
     
     """
-    item    = Item.query.filter_by(id=productID).first_or_404()
-    imgs    = sorted(Image.query.filter_by(item_id=item.id).all(), key=lambda x: x.is_primary)
-    cats    = [Category.get(x.category_id) for x in Category_Item.query.filter_by(item_id=item.id).all()]
-    brand   = [Brand.query.get(x.brand_id) for x in Brand_Item.query.filter_by(item_id=item.id).all()]
-    details = Details.query.filter_by(item_id=item.id).all()
-    bullets = Bullets.query.filter_by(item_id=item.id).all()
+    item    = Item.query.filter_by(id=productID).first_or_404() # Grab raw object
+    imgs    = sorted(Image.query.filter_by(item_id=item.id).all(), key=lambda x: x.is_primary) # Get images for objects and put primary first
+    cats    = [Category.get(x.category_id) for x in Category_Item.query.filter_by(item_id=item.id).all()] # Get Categories
+    brand   = [Brand.query.get(x.brand_id) for x in Brand_Item.query.filter_by(item_id=item.id).all()] # get brand
+    details = Details.query.filter_by(item_id=item.id).all() # get details
+    bullets = Bullets.query.filter_by(item_id=item.id).all() # get bullet points
 
     return json.dumps({
         'id'        :item.id,
@@ -94,72 +99,88 @@ def addProduct():
 
     The code here is an antipattern
     """
-    # try:
-    data = request.get_json()
-    data = http.get(
-        f"{zinc}/products/{data['product_id']}",
-        params=[('retailer', data['retailer'])],
-        auth=(api_key, '')
-    )
-    data = data.json()
-    item = Item(
-        product_id=data['product_id'],
-        title=data['title'],
-        desc=data['product_description'],
-        old_price=data['price'],
-        new_price=(int(data['price'])*1.4),
-    )
-    categories = [
-        Category(
-            title=x
+    try:
+        # Grab the post request
+        data = request.get_json()
+
+        # grab the item from the API per the POST
+        data = http.get(
+            f"{zinc}/products/{data['product_id']}",
+            params=[('retailer', data['retailer'])],
+            auth=(api_key, '')
         )
-        for x in data['categories']
-    ]
-    brand = Brand.query.filter_by(title=data['brand']).first()
-    brand = brand if brand else Brand(title=data['brand'])
-    db.session.add_all([
-            item,
-            brand,
-            *categories,
-            Brand_Item(
-                item_id=item.id,
-                brand_id=brand.id
-            ),
-            *[
-                Bullet(
-                    item_id=item.id,
-                    text=x
-                )
-                for x in data['feature_bullets']
-            ],
-            *[
-                Image(
-                    item_id=item.id,
-                    img_url=x,
-                    is_primary=False if index != 0 else True,
-                )
-                for index, x in enumerate(data['images'])
-            ],
-            *[
-                Category_Item(
-                    item_id=item.id,
-                    category_id=x.id
-                )
-                for x in categories
-            ],
-            *[
-                Details(
-                    item_id=item.id,
-                    text=x
-                )
-                for x in data['details']
-            ]
+        data = data.json()
+
+        # Create base item class
+        item = Item(
+            product_id=data['product_id'],
+            title=data['title'],
+            desc=data['product_description'],
+            old_price=data['price'],
+            new_price=(int(data['price'])*1.4),
+        )
+        # Makes the new categories
+        # TODO: check for existing 
+        categories = [
+            Category(
+                title=x
+            )
+            for x in data['categories']
         ]
-    )
-    db.session.commit()
-    return "Success", 200
-    # except:
-    return "Invalid json format", 400
+        # Querys for the brand
+        brand = Brand.query.filter_by(title=data['brand']).first()
+
+        # Creates new brand if not existant in local db
+        brand = brand if brand else Brand(title=data['brand'])
+
+        # Commits the items to the db
+        db.session.add_all([
+                item,
+                brand,
+                *categories,
+                Brand_Item(
+                    item_id=item.id,
+                    brand_id=brand.id
+                ),
+                # dynamically uses list comprehention to generate list of
+                # classes and then unwraps them into function as individuals
+                # This is done multiple times for a number of tables
+                *[
+                    Bullets(
+                        item_id=item.id,
+                        text=x
+                    )
+                    for x in data['feature_bullets']
+                ],
+                *[
+                    Image(
+                        item_id=item.id,
+                        img_url=x,
+                        is_primary=False if index != 0 else True,
+                    )
+                    for index, x in enumerate(data['images'])
+                ],
+                *[
+                    Category_Item(
+                        item_id=item.id,
+                        category_id=x.id
+                    )
+                    for x in categories
+                ],
+                *[
+                    Details(
+                        item_id=item.id,
+                        text=x
+                    )
+                    for x in data['details']
+                ]
+            ]
+        )
+        # Commits to the db
+        db.session.commit()
+        return "Success", 200
+    except:
+        return "Invalid json format", 400
 
 
 @api.route('/makeOrder', methods=['POST'])
@@ -168,11 +189,16 @@ def makeOrder():
     Make Order
 
     This route takes a list of product(s) and creates a
-    zinc order 
+    zinc order.
+
+    TODO: define input format in comment
     
     """
     try:
+        # gets post request
         data = request.get_json()
+
+        # Posts to zinc to create order as per POST
         data = http.post(
             f"{zinc}/orders",
             data=json.dumps({
@@ -189,16 +215,24 @@ def makeOrder():
             }),
             auth=(api_key)
         ).json()
+        # Creates an order object from response
         db.session.add(
             Orders(
                 code=data['order'],
             )
         )
+        return "Success", 200
     except:
         return "Invalid json format", 500
 
 
 @app.before_request
 def check_orders():
+    """
+    Check orders
+
+    This method checks all active orders for their current
+    state to ensure an up to date database.
+    """
     for order in Orders.query.filter_by(active=True).all():
         order.check_active()
