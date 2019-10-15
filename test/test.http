@@ -1,0 +1,7 @@
+POST http://127.0.0.1:5000/api/addProduct
+content-type: application/json
+
+{
+    "retailer": "aliexpress",
+    "product_id": "32850545097"
+}

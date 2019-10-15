@@ -8,7 +8,7 @@ import requests
 from flask import Blueprint, request
 from keys import api_key, retailer_credentials
 
-from app import db, celery
+from app import app, db
 from app.models import (
     Item,
     Image,
@@ -99,7 +99,7 @@ def addProduct():
             f"{zinc}/products/{data['product_id']}",
             params=[('retailer', data['retailer'])],
             auth=(api_key)
-        )
+        ).json()
         item = Item(
             product_id=data['product_id'],
             title=data['title'],
@@ -178,7 +178,7 @@ def makeOrder():
                 "shipping_method": data['shipping_method']
             }),
             auth=(api_key)
-        )
+        ).json()
         db.session.add(
             Orders(
                 code=data['order'],
@@ -186,3 +186,9 @@ def makeOrder():
         )
     except:
         return "Invalid json format", 500
+
+
+@app.before_request
+def check_orders():
+    for order in Orders.query.filter_by(active=True).all():
+        order.check_active()
