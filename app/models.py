@@ -98,9 +98,17 @@ class Orders(db.Model):
     status = db.Column(db.String(50))
     active = db.Column(db.Boolean, default=True)
 
-    # def check_active(self):
-    #     data = requests.get(
-    #         f"https://api.zinc.io/v1/orders/{self.code}",
-    #         auth=(api_key)
-    #     )
-    #     self.status = data['']
+    def check_active(self):
+        data = requests.get(
+            f"https://api.zinc.io/v1/orders/{self.code}",
+            auth=(api_key)
+        )
+        if data['_type'] == 'error' or data.get('status') != 'request_processing':
+            self.status = data['code']
+            self.active = False
+        elif len(data['delivery_dates']):
+            self.status = 'delivered'
+            self.active = False
+        else:
+            self.status = 'shipping'
+            self.active = False

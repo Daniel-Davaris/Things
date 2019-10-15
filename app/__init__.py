@@ -1,5 +1,4 @@
 from config import Config
-from backgroud import make_celery
 
 from flask import Flask
 from flask_cors import CORS
@@ -13,10 +12,9 @@ cors = CORS(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
-# celery = make_celery(app)
 
 from app.api import api
-app.register_blueprint(api, url_prefix='/api')
+app.register_blueprint(api, url_prefix='/api/')
 
 
 login.login_view = 'auth.login'
