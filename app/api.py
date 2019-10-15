@@ -4,7 +4,7 @@ API is a file handling the product selling of the site
 Written by (proudly at the time): Stephan Kashkarov
 """
 import json
-import requests
+from requests import Session
 from flask import Blueprint, request
 from keys import api_key, retailer_credentials
 
@@ -22,7 +22,8 @@ from app.models import (
 )
 
 zinc = 'https://api.zinc.io/v1/'
-
+http = Session()
+http.auth = (api_key, '')
 api = Blueprint('API', __name__)
 
 @api.route('/getProduct/<productID>') # Send a get request to url.com/api/getProduct/*ID*HERE*
@@ -93,77 +94,86 @@ def addProduct():
 
     The code here is an antipattern
     """
-    try:
-        data = request.get_json()
-        data = requests.get(
-            f"{zinc}/products/{data['product_id']}",
-            params=[('retailer', data['retailer'])],
-            auth=(api_key)
-        ).json()
-        item = Item(
-            product_id=data['product_id'],
-            title=data['title'],
-            desc=data['product_description'],
-            old_price=data['price'],
-            new_price=(int(data['price'])*1.4),
+    # try:
+    data = request.get_json()
+    data = http.get(
+        f"{zinc}/products/{data['product_id']}",
+        params=[('retailer', data['retailer'])],
+        auth=(api_key, '')
+    )
+    data = data.json()
+    item = Item(
+        product_id=data['product_id'],
+        title=data['title'],
+        desc=data['product_description'],
+        old_price=data['price'],
+        new_price=(int(data['price'])*1.4),
+    )
+    categories = [
+        Category(
+            title=x
         )
-        categories = [
-            Category(
-                title=x
-            )
-            for x in data['categories']
-        ]
-        brand = Brand.query.filter_by(title=data['brand']).first()
-        brand = brand if brand else Brand(title=data['brand'])
-        db.session.add_all([
-                item,
-                brand,
-                *categories,
-                Brand_Item(
+        for x in data['categories']
+    ]
+    brand = Brand.query.filter_by(title=data['brand']).first()
+    brand = brand if brand else Brand(title=data['brand'])
+    db.session.add_all([
+            item,
+            brand,
+            *categories,
+            Brand_Item(
+                item_id=item.id,
+                brand_id=brand.id
+            ),
+            *[
+                Bullet(
                     item_id=item.id,
-                    brand_id=brand.id
-                ),
-                *[
-                    Bullet(
-                        item_id=item.id,
-                        text=x
-                    )
-                    for x in data['feature_bullets']
-                ],
-                *[
-                    Image(
-                        item_id=item.id,
-                        img_url=x,
-                        is_primary=False if index != 0 else True,
-                    )
-                    for index, x in enumerate(data['images'])
-                ],
-                *[
-                    Category_Item(
-                        item_id=item.id,
-                        category_id=x.id
-                    )
-                    for x in categories
-                ],
-                *[
-                    Details(
-                        item_id=item.id,
-                        text=x
-                    )
-                    for x in data['details']
-                ]
+                    text=x
+                )
+                for x in data['feature_bullets']
+            ],
+            *[
+                Image(
+                    item_id=item.id,
+                    img_url=x,
+                    is_primary=False if index != 0 else True,
+                )
+                for index, x in enumerate(data['images'])
+            ],
+            *[
+                Category_Item(
+                    item_id=item.id,
+                    category_id=x.id
+                )
+                for x in categories
+            ],
+            *[
+                Details(
+                    item_id=item.id,
+                    text=x
+                )
+                for x in data['details']
             ]
-        )
-        db.session.commit()
-    except:
-        return "Invalid json format", 500
+        ]
+    )
+    db.session.commit()
+    return "Success", 200
+    # except:
+    return "Invalid json format", 400
 
 
 @api.route('/makeOrder', methods=['POST'])
 def makeOrder():
+    """
+    Make Order
+
+    This route takes a list of product(s) and creates a
+    zinc order 
+    
+    """
     try:
         data = request.get_json()
-        data = requests.post(
+        data = http.post(
             f"{zinc}/orders",
             data=json.dumps({
                 "retailer": "aliexpress",
