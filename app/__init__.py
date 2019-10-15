@@ -12,10 +12,6 @@ cors = CORS(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
-<<<<<<< HEAD
-=======
-# celery = make_celery(app)
->>>>>>> 53c60ccd44fa66f34a679f1396d2754b50e60cff
 
 from app.api import api
 app.register_blueprint(api, url_prefix='/api/')
