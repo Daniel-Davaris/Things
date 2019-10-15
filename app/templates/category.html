@@ -183,7 +183,12 @@
                         <!-- products    -->
 
                         {% for product in products %}
-                        <div class="col-lg-4 col-sm-6">
+                        <ul>
+                            {% for i in data %}
+                                <li>{{ i }}</li>
+                            {% endfor %}
+                        </ul>
+                        <!-- <div class="col-lg-4 col-sm-6">
                             <div class="single_category_product">
                                 <div class="single_category_img">
                                     <img src="{{url_for('static', filename='')}}" alt="">
@@ -199,7 +204,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         {% endfor %}
 
               

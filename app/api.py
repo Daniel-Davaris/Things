@@ -6,9 +6,9 @@ Written by (proudly at the time): Stephan Kashkarov
 import json
 import requests
 from flask import Blueprint, request
-from keys import api_key, retailer_credentials
+# from keys import api_key, retailer_credentials
 
-from app import db, celery
+# from app import db, celery
 from app.models import (
     Item,
     Image,

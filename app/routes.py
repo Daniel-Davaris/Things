@@ -2,7 +2,7 @@ from app import app, db
 from keys import api_key
 from datetime import datetime
 from werkzeug.urls import url_parse
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, json
 from flask_login import login_user, logout_user, current_user, login_required
 import os
 
@@ -16,16 +16,10 @@ def home():
 @app.route('/category')
 def category():
     title = "Categories"
-    jsonFile = "test_data.json"
-    if os.path.exists(jsonFile):
-        file_data = ""
-        try:
-            with open(jsonFile) as f:
-                file_data = json.load(f)
-            f.close()
-        except:
-            file_data = "could not read file"
-        return render_template('category.html', title=title, data=file_data)
+    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+    json_url = os.path.join(SITE_ROOT, "", "test_data.json")
+    data = json.load(open(json_url))
+    return render_template('categories.html', data=data, title=title)
 
 
 @app.route('/checkout')
