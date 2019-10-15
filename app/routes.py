@@ -4,6 +4,7 @@ from datetime import datetime
 from werkzeug.urls import url_parse
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
+import os
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -14,8 +15,18 @@ def home():
 
 @app.route('/category')
 def category():
-    
-    return render_template('category.html', title='category')
+    title = "Categories"
+    jsonFile = "test_data.json"
+    if os.path.exists(jsonFile):
+        file_data = ""
+        try:
+            with open(jsonFile) as f:
+                file_data = json.load(f)
+            f.close()
+        except:
+            file_data = "could not read file"
+        return render_template('category.html', title=title, data=file_data)
+
 
 @app.route('/checkout')
 def checkout():
